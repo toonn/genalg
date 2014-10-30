@@ -1,0 +1,6 @@
+operators wijzigen
+gradueel wijzigen welke operators je toepast (eerst meer brute en dan meer fijne)
+loop detection
+met parameters spelen
+relevantietesten
+toenemen, afnemen van de populatie
