@@ -16,6 +16,8 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
 % CROSSOVER: the crossover operator
 % calculate distance matrix between each pair of cities
 % ah1, ah2, ah3: axes handles to visualise tsp
+%                   Either omit all arguments from ah1 onwards
+%                   or pass [] for each ah_.
 {NIND MAXGEN NVAR ELITIST STOP_PERCENTAGE PR_CROSS PR_MUT CROSSOVER LOCALLOOP}
     %default waarden voor de extra toegevoegde opties
     if ~exist('mutation', 'var')
@@ -65,8 +67,16 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
         worst(gen+1)=sObjV(end);
         t=indices(1);
 
-        visualizeTSP(x,y,adj2path(Chrom(t,:)), minimum, ah1, gen, best, mean_fits, worst, ah2, ObjV, NIND, ah3);
-
+        % Visualisation is optional
+        % 'exist' in case only arguments before ah1... are used
+        % 'isempty' allows skipping ah_ arguments by passing [], if you
+        % want to pass later arguments
+        if (exist('ah1', 'var') && ~isempty(ah1) ...
+                && exist('ah2', 'var') && ~isempty(ah2) ...
+                && exst('ah3', 'var') && ~isempty(ah3))
+            visualizeTSP(x,y,adj2path(Chrom(t,:)), minimum, ah1, gen, best, mean_fits, worst, ah2, ObjV, NIND, ah3);
+        end
+        
         %termination criterion
         if (sObjV(stopN)-sObjV(1) <= 1e-15)
               break;
