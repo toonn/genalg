@@ -18,18 +18,19 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
 % ah1, ah2, ah3: axes handles to visualise tsp
 {NIND MAXGEN NVAR ELITIST STOP_PERCENTAGE PR_CROSS PR_MUT CROSSOVER LOCALLOOP}
     %default waarden voor de extra toegevoegde opties
-    if(nargin < 18)
-        os_selection='aMethod';
-        if(nargin < 17)
-            os_selection_percentage=0;
-            if(nargin < 16)
-                selection='sus';
-                if(nargin < 15)
-                    mutation='inversion';
-                end
-            end
-        end
+    if ~exist('mutation', 'var')
+        mutation = 'inversion';
     end
+    if ~exist('selection', 'var')
+        selection = 'sus';
+    end
+    if ~exist('os_selection_percentage', 'var')
+        os_selection_percentage = 0;
+    end
+    if ~exist('os_selection', 'var')
+        os_selection = 'aMethod';
+    end
+    
     GGAP = 1 - ELITIST;
     %Wat variabelen initialiseren met de correcte grootte
     mean_fits=zeros(1,MAXGEN+1);
