@@ -73,7 +73,7 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
         % want to pass later arguments
         if (exist('ah1', 'var') && ~isempty(ah1) ...
                 && exist('ah2', 'var') && ~isempty(ah2) ...
-                && exst('ah3', 'var') && ~isempty(ah3))
+                && exist('ah3', 'var') && ~isempty(ah3))
             visualizeTSP(x,y,adj2path(Chrom(t,:)), minimum, ah1, gen, best, mean_fits, worst, ah2, ObjV, NIND, ah3);
         end
         
