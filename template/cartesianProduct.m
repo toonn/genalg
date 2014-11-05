@@ -1,11 +1,19 @@
 function result = cartesianProduct(sets)
     if size(sets, 2) == 0
-        result = [{}]
+        result = {{}};
     else
-        result = zeros(0,1)
-        for elem = sets(1)
-            for cell = cartesianProduct(sets(2:end))
-                [result ; [elem cell]]
+        if size(sets, 2) == 1
+            result = {};
+            for elem = sets{1}
+                result = [result ; elem];
+            end
+        else
+            result = {};
+            previous = cartesianProduct(sets(2:end));
+            for elem = sets{1}
+                for cell = previous'
+                    result = [result ; [elem cell']];
+                end
             end
         end
     end
