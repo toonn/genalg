@@ -7,7 +7,7 @@
 % Tim.Pillards@cs.kuleuven.ac.be
 %
 
-function Offspring=cross_alternate_edges(Parents);
+function Offspring=cross_alternate_edges(Parents)
 	cols=size(Parents,2);
 	Offspring=zeros(1,cols);
     [sx,InverseParents1]=sort(Parents(1,:));

@@ -14,7 +14,9 @@ if Representation==1
 end
 
 % swap two random cities in the tour
+
 rndi=zeros(1,2);
+
 while rndi(1)==rndi(2)
 	rndi=rand_int(1,2,[1 size(NewChrom,2)]);
 end
@@ -30,4 +32,3 @@ end
 
 
 % End of function
-

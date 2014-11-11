@@ -1,4 +1,4 @@
-function child = edge_recombination_operator(parent1, parent2)
+function child = edge_recombination_operator(parent1, parent2, ~)
 
 N=size(parent1,2);
 
@@ -17,7 +17,7 @@ for i=1:N
 end
 connectedCities;
 %je moet met een random positie beginnen aangezien het op de beginpositie
-%is dat een nieuwe edge zal worden geïntroduceerd normaal gezien
+%is dat een nieuwe edge zal worden geï¿½ntroduceerd normaal gezien
 p=randi(N);
 child(1)=p;
 list(find(list==p))=0;
