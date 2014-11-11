@@ -1,4 +1,4 @@
-function child = edge_recombination_operator(parent1, parent2, ~)
+function child = co_edge_recombination_operator(parent1, parent2, ~)
 
 N=size(parent1,2);
 
