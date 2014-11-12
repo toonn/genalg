@@ -1,6 +1,20 @@
-function smallest_tour_dist = run_genalg(x, y, NIND, MAXGEN, ELITIST, ...
-                STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER, ...
-                mutation, selection, os_selection_percentage, os_selection)
+function smallest_tour_dist = run_genalg(x, y, ps)
+NIND = ps{1};
+MAXGEN = ps{2};
+ELITIST = ps{3};
+STOP_PERCENTAGE = ps{4};
+PR_CROSS = ps{5};
+cross1 = ps{6};
+cross2 = ps{7};
+cross3 = ps{8};
+cross4 = ps{9};
+PR_MUT = ps{10};
+mut1 = ps{11};
+mut2 = ps{12};
+mut3 = ps{13};
+selection = ps{14};
+os_selection_percentage = ps{15};
+os_selection = ps{16};
 % usage: run_ga(x, y, 
 %               NIND, MAXGEN, NVAR, 
 %               ELITIST, STOP_PERCENTAGE, 
@@ -26,7 +40,7 @@ function smallest_tour_dist = run_genalg(x, y, NIND, MAXGEN, ELITIST, ...
 
     %default waarden voor de extra toegevoegde opties
     if ~exist('mutation', 'var')
-        mutation = 'inversion';
+        mutation = @mu_inversion;
     end
     if ~exist('selection', 'var')
         selection = 'sus';
@@ -87,8 +101,8 @@ function smallest_tour_dist = run_genalg(x, y, NIND, MAXGEN, ELITIST, ...
                                         round(os_selection_percentage*NVAR));
             %nog iets om [Chrom ObjV te krijgen]
         else
-            SelCh = recombin(CROSSOVER,SelCh,PR_CROSS);
-            SelCh = mutateTSP(mutation,SelCh,PR_MUT);
+            SelCh = recombine(CROSSOVER, SelCh, Dist);
+            SelCh = mutateTSP(mutation, SelCh, PR_MUT);
             %evaluate offspring, call objective function
             ObjVSel = tspfun(SelCh,Dist);
             %reinsert offspring into population

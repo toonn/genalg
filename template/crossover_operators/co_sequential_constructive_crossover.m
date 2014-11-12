@@ -6,7 +6,7 @@
 
 
 %Expected representation: path
-function child = co_sequential_constructive_crossover(parent1, parent2, costMatrix)
+function child = co_sequential_constructive_crossover(parent1, parent2, costMatrix, ~)
 % costMatrix=[999 75  99  9   35  63  8 ;
 %             51  999 86  46  88  29  20;
 %             100 5   999 16  28  35  28;
