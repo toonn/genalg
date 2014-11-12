@@ -1,0 +1,10 @@
+Presentatie:
+We gebruiken GA om de parameters te bepalen
+We gebruiken daarvoor een heel simpele GA
+
+Wat samen hoort zit samen in het chromosoom
+
+We zijn drie meta niveaus ver gegaan en kwamen God tegen
+
+
+We laten een opening naar adaptiviteit (zo dat de parameters wijzigen over de tijd)
