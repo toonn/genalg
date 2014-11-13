@@ -2,6 +2,8 @@ data = load(['datasets/' 'rondrit016.tsp']);
 x=data(:,1)/max([data(:,1);data(:,2)]);
 y=data(:,2)/max([data(:,1);data(:,2)]);
 
+rng(121);
+
 Nind = 50;
 Nind_co = 30;
 Nind_mu = Nind - Nind_co - 1;
@@ -16,7 +18,7 @@ for gen = 1:20
         tic;
             best_dist = run_genalg(x, y, ind);
         t = toc;
-        F = f + t;
+        F = best_dist + t;
         Fs = [Fs ; F];
     end
 

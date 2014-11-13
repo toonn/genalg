@@ -16,19 +16,18 @@
 %                after mutation in the same format as OldChrom.
 
 
-function NewChrom = mutateTSP(MUT_F, OldChrom, MutOpt);
-
+function NewChrom = mutateTSP(MUT_Fs, mutation_probs, OldChrom, MutOpt);
+MUT_Fs = {@mu_inversion, @mu_inversion, @mu_inversion};
 % Check parameter consistency
-   if nargin < 2,  error('Not enough input parameters'); end
+   if nargin < 3,  error('Not enough input parameters'); end
 
 [rows,cols]=size(OldChrom);
 NewChrom=OldChrom;
 
 for r=1:rows
 	if rand<MutOpt
-		NewChrom(r,:) = feval(MUT_F, OldChrom(r,:),1);
+        mut_Ix = randsample(1:size(MUT_Fs, 2), 1, true, mutation_probs);
+		NewChrom(r,:) = feval(MUT_Fs{mut_Ix}, OldChrom(r,:),1);
 	end
 end
-
-% End of function
 
