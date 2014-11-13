@@ -4,3 +4,5 @@ loop detection
 met parameters spelen
 relevantietesten
 toenemen, afnemen van de populatie
+
+reduced surrogate (zie bespreking van alle crossover operatoren): maakt wel niet veel uit denk ik
