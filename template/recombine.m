@@ -25,20 +25,15 @@
 
 
 
-function NewChrom = recombine(REC_F, Chrom, costMatrix);
-
-   % Identify the population size (Nind)
-   [Nind,Nvar] = size(Chrom);
-
-% Select individuals of one subpopulation and call low level function
-   NewChrom = [];
-   for irun = 1:2:size(Chrom,1)-1
-      parent1 = Chrom(irun, :);
-      parent2 = Chrom(irun+1, :);
-      NewChromSub = feval(REC_F, parent1, parent2, costMatrix);
-      NewChrom=[NewChrom; NewChromSub];
-   end
-
-
-% End of function
+function NewChrom = recombine(REC_Fs, crossover_probs, Chrom, costMatrix)
+    REC_Fs = {@co_edge_recombination_operator, @co_edge_recombination_operator, @co_edge_recombination_operator, @co_edge_recombination_operator};
+    crossover_probs = crossover_probs/sum(crossover_probs);
+    NewChrom = [];
+    for irun = 1:2:size(Chrom,1)-1
+        parent1 = Chrom(irun, :);
+        parent2 = Chrom(irun+1, :);
+        cx_Ix = randsample(1:size(REC_Fs, 2), 1, true, crossover_probs);
+        children = feval(REC_Fs{cx_Ix}, parent1, parent2, costMatrix);
+        NewChrom=[NewChrom; children];
+    end
 

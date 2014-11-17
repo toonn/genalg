@@ -7,7 +7,7 @@ function child = co_cyclic_crossover(parent1, parent2, ~)
     N=size(parent1,2);
     child=zeros(1,N);
 
-    i=rand(N);
+    i=randi(N);
     parent=randi(2);
     k=N+1;
 
