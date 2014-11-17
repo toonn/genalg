@@ -8,8 +8,13 @@ nofInts=2;
 possibleSels={@sus};
 possibleOsSels={};
 
+cross = [0, 1];
+mut = [0, 1];
 global limits
-limits={100 20 1 1 1 1 1 1 1 1 1 1 1 possibleSels 0 possibleOsSels};
+limits={[2, 100] [1, 20] [0, 1] [0, 1]...
+        [0, 1] cross cross cross cross...
+        [0, 1] mut mut mut...
+        possibleSels [0, 0] possibleOsSels};
 
 global mutFreqs
 mutFreqs=num2cell(cumsum(ones(1,16)/16));

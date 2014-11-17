@@ -10,10 +10,11 @@ function smallest_tour_dist = run_genalg(x, y, ps)
     STOP_PERCENTAGE = ps{4};
 % PR_CROSS: probability for crossover
     PR_CROSS = ps{5};
-    crossover_operators = {@co_cross_alternate_edges, ...
-                            @co_cyclic_crossover, ...
-                            @co_edge_recombination_operator, ...
-                            @co_sequential_constructive_crossover};
+    crossover_operators = {@co_cyclic_crossover,@co_cyclic_crossover,@co_cyclic_crossover,@co_cyclic_crossover};
+%     {@co_cross_alternate_edges, ...
+%                             @co_cyclic_crossover, ...
+%                             @co_edge_recombination_operator, ...
+%                             @co_sequential_constructive_crossover};
     crossover_probs = [ps{6:9}];
 % PR_MUT: probability for mutation
     PR_MUT = ps{10};
@@ -72,7 +73,7 @@ function smallest_tour_dist = run_genalg(x, y, ps)
         SelCh=select(selection, Chrom, FitnV, GGAP+(mod(NSel,2)/Nind));
 
         %recombine individuals (crossover)
-        if(round(os_selection_percentage*NVAR)>=1)
+        if(false && round(os_selection_percentage*NVAR)>=1)
             %iets dat de offspringselection moet doen
             SelCh = offspringSelection(os_selection,CROSSOVER,mutation, ...
                                         SelCh,pr_cross,pr_mut, ...
@@ -87,10 +88,9 @@ function smallest_tour_dist = run_genalg(x, y, ps)
             [Chrom, ObjV]=reins(Chrom,SelCh,1,1,ObjV,ObjVSel);
             Chrom = mutateTSP(mutation_operators, mutation_probs, Chrom, PR_MUT);
         end
-        Chrom = tsp_ImprovePopulation(Nind, NVAR, Chrom,1,Dist);
+        %Chrom = tsp_ImprovePopulation(Nind, NVAR, Chrom,1,Dist);
         %increment generation counter
         gen=gen+1;
     end
-    
     smallest_tour_dist = best(end);
 end
