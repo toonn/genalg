@@ -1,0 +1,22 @@
+crossovers:
+sequential constructive crossover				zelf geïmplementeerd
+edge recombination operator (ERX)				zelf geïmplementeerd
+
+Wat er al in zit
+reduced surrogate zorgt dat er altijd nieuwe individuen worden geproduceerd als het mogelijk is; dus dat het kind normaal verschilt van de ouders
+double point crossover							zit in gatbx als xovdp
+double point crossover with reduced surrogate	zit in gatbx als xovdprs
+crossover shuffle								zit in gatbx als xovsh
+crossover shuffle with reduced surrogate		zit in gatbx als xovshrs
+single point crossover							zit in gatbx als xovsp
+single point crossover with reduced surrogate	zit in gatbx als xovdprs
+multi-point crossover							zit in gatbx als xovmp
+
+partially matched crossover (PMX)						
+order crossover (OX) -> beter dan PMX en CX, niet meer met edges
+cycle crossover (CX) -> beter dan PMX			zelf geïmplementeerd
+
+voor adjacency representation wat slechte crossovers:
+subtour chunks crossover						
+alternating edge crossover						zit in template
+heuristic crossover								
