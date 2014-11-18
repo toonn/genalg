@@ -22,22 +22,29 @@ for gen = 1:20
         Fs = [Fs ; F];
     end
 
-    elite = Fs(Fs == min(Fs));
+    elite = {pop{find(Fs == min(Fs),1), :}};
+
+%    elite={};
+%     [~,order]=sort(Fs);
+%     for i=1:NofElites
+%         elite = [elite ; {pop{find(Fs == Fs(order(i)),1),:}}];
+%     end
+    
 
     parents = sus(Fs, 2*Nind_co);
+    
     offspring = {};
     for i = 1:2:size(parents,1)
-        child = meta_co_singlepoint_crossover(pop{parents(i)}, pop{parents(i+1)});
+        child = meta_co_singlepoint_crossover({pop{parents(i),:}}, {pop{parents(i+1),:}});
         offspring = [offspring ; child];
     end
 
     mutantParents = sus(Fs, Nind_mu);
     mutants = {};
     for m = 1:size(mutantParents, 1)
-        mutant = meta_mu_pointMutation(pop{mutantParents(m)});
+        mutant = meta_mu_pointMutation({pop{mutantParents(m), :}});
         mutants = [mutants ; mutant];
     end
-    
     pop = [elite ; offspring ; mutants];
 end
 

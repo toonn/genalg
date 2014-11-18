@@ -26,7 +26,6 @@
 
 
 function NewChrom = recombine(REC_Fs, crossover_probs, Chrom, costMatrix)
-    REC_Fs = {@co_edge_recombination_operator, @co_edge_recombination_operator, @co_edge_recombination_operator, @co_edge_recombination_operator};
     crossover_probs = crossover_probs/sum(crossover_probs);
     NewChrom = [];
     for irun = 1:2:size(Chrom,1)-1

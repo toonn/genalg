@@ -1,22 +1,27 @@
 function child = co_cyclic_crossover(parent1, parent2, ~)
-
-%     parent1=[1 2 3 4 5 6 7 8 9 10];
-%     parent2=[3 6 7 1 8 2 4 9 5 10];
+    
+    parent1 = adj2path(parent1);
+    parent2 = adj2path(parent2);
 
     parents=[parent1 ; parent2];
     N=size(parent1,2);
-    child=zeros(1,N);
+    child=zeros(2,N);
 
     i=randi(N);
-    parent=randi(2);
-    k=N+1;
 
-    while(isempty(find(child==k)))
-        child(i)=parents(parent,i)
-        k=parents(mod(parent,2)+1,i)
-        i=find(parents(parent,:)==k)
+    child(1,1) = parents(1,1);
+    child(2,1) = parents(2,1);
+    next = [find(parents(1,:) == parents(2,1)), ...
+            find(parents(2,:) == parents(1,1))];
+    while (next(1) ~= 1)
+        child(1, next(1)) = parents(1, next(1));
+        child(2, next(2)) = parents(2, next(2));
+        next = [find(parents(1,:) == parents(2,next(1))), ...
+                find(parents(2,:) == parents(1,next(2)))];
     end
-
-    child(find(child==0))=parents(2,find(child==0))
-
+    parents([1 2], :) = parents([2 1], :);
+    child(find(child==0)) = parents(find(child==0));
+    
+    child(1,:) = path2adj(child(1,:));
+    child(2,:) = path2adj(child(2,:));
 end
