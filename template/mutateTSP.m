@@ -25,14 +25,14 @@ NewChrom=OldChrom;
 
 for r=1:rows
 	if rand<MutOpt
-        eeNewChrom = NewChrom(r,:);
+%         eeNewChrom = NewChrom(r,:);
         mut_Ix = randsample(1:size(MUT_Fs, 2), 1, true, mutation_probs);
 		NewChrom(r,:) = feval(MUT_Fs{mut_Ix}, OldChrom(r,:),1);
-        if (NewChrom(r,1) == 1)
-            'abab'
-            eeNewChrom
-            NewChrom(r,:)
-        end
+%         if (NewChrom(r,1) == 1)
+%             'abab'
+%             eeNewChrom
+%             NewChrom(r,:)
+%         end
 	end
 end
 

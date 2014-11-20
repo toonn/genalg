@@ -6,17 +6,17 @@
 
 
 %Expected representation: path
-% function children = co_sequential_constructive_crossover(parent1, parent2, costMatrix, ~)
-costMatrix=[999 75  99  9   35  63  8 ;
-            51  999 86  46  88  29  20;
-            100 5   999 16  28  35  28;
-            20  45  11  999 59  53  49;
-            86  63  33  65  999 76  72;
-            36  53  89  31  21  999 52;
-            58  31  43  67  52  60  999];
-
-parent1=[1 5 7 3 6 4 2];
-parent2=[1 6 2 4 3 5 7];
+function children = co_sequential_constructive_crossover(parent1, parent2, costMatrix, ~)
+% costMatrix=[999 75  99  9   35  63  8 ;
+%             51  999 86  46  88  29  20;
+%             100 5   999 16  28  35  28;
+%             20  45  11  999 59  53  49;
+%             86  63  33  65  999 76  72;
+%             36  53  89  31  21  999 52;
+%             58  31  43  67  52  60  999];
+% 
+% parent1=[1 5 7 3 6 4 2];
+% parent2=[1 6 2 4 3 5 7];
 
 parents=[parent1 ; parent2]';
 N=size(parent1,2);
@@ -56,4 +56,4 @@ for j=1:2
     children(j,:)=child;
 end
     
-% end
+end
