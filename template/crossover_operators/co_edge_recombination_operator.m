@@ -1,5 +1,6 @@
 function children = co_edge_recombination_operator(parent1, parent2, ~)
-
+parent1 = adj2path(parent1);
+parent2 = adj2path(parent2);
 N=size(parent1,2);
 
 child=zeros(1,N);
@@ -48,7 +49,7 @@ for u=1:2
         list(find(list==p))=0;
     end
     
-    children(u,:)=child;
+    children(u,:)=path2adj(child);
 end
 
 end

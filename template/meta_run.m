@@ -4,14 +4,18 @@ y=data(:,2)/max([data(:,1);data(:,2)]);
 
 rng(4);
 
+ncities = size(x,1);
+ngens = 20;
 Nind = 50;
 Nind_co = 30;
 Nind_mu = Nind - Nind_co - 1;
 
+generations = cell(Nind, ncities + 1, ngens);
+
 meta_chromosome;
 pop = meta_generateInitialPop(50);
 
-for gen = 1:10
+for gen = 1:ngens
     Fs = [];
     for ind = pop'  
         ind = ind';
@@ -44,7 +48,8 @@ for gen = 1:10
         mutants = [mutants ; mutant];
     end
     pop = [elite ; offspring ; mutants];
+    generations(:,:,gen) = [pop, num2cell(Fs)];
 end
 
-elite
+status = 'finished'
     

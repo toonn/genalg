@@ -70,7 +70,7 @@ function smallest_tour_dist = run_genalg(x, y, ps)
         % Werkt niet voor subpopulaties!
         NSel=max(floor(Nind*GGAP+.5),2);
         SelCh=select(selection, Chrom, FitnV, GGAP+(mod(NSel,2)/Nind));
-
+        
         %recombine individuals (crossover)
         if(false && round(os_selection_percentage*NVAR)>=1)
             %iets dat de offspringselection moet doen
