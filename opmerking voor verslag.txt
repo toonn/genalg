@@ -1,0 +1,6 @@
+hoe die waarden voor time cost bepalen voor elke parameter
+het zal allemaal wel schalen met Nind, en voor elke crossover operator meet je dan bv.
+	de gemiddelde tijd over 1000 experimenten (duurt 0 seconden sowieso) en dan die
+	maal de Nind en maal het percentage dat die crossover operator wordt gebruikt en 
+	BAM
+parallelliseren

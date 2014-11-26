@@ -31,7 +31,6 @@ for gen = 1:ngens
 %     for i=1:NofElites
 %         elite = [elite ; {pop{find(Fs == Fs(order(i)),1),:}}];
 %     end
-    
 
     parents = sus(Fs, 2*Nind_co);
     
