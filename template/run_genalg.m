@@ -10,11 +10,10 @@ function smallest_tour_dist = run_genalg(x, y, ps)
     STOP_PERCENTAGE = ps{4};
 % PR_CROSS: probability for crossover
     PR_CROSS = ps{5};
-    crossover_operators = {@co_cyclic_crossover,@co_cyclic_crossover,@co_cyclic_crossover,@co_cyclic_crossover};
-%     {@co_cross_alternate_edges, ...
-%                             @co_cyclic_crossover, ...
-%                             @co_edge_recombination_operator, ...
-%                             @co_sequential_constructive_crossover};
+    crossover_operators = {@co_cross_alternate_edges, ...
+                            @co_cyclic_crossover, ...
+                            @co_edge_recombination_operator, ...
+                            @co_sequential_constructive_crossover};
     crossover_probs = [ps{6:9}];
 % PR_MUT: probability for mutation
     PR_MUT = ps{10};
@@ -30,13 +29,13 @@ function smallest_tour_dist = run_genalg(x, y, ps)
     
     GGAP = 1 - ELITIST;
     %Wat variabelen initialiseren met de correcte grootte
-    best=zeros(1,MAXGEN);
-    mean_fits=zeros(1,MAXGEN+1);
-    worst=zeros(1,MAXGEN+1);
+    best=ones(1,MAXGEN)*Inf;
+    mean_fits=zeros(1,MAXGEN);
+    worst=zeros(1,MAXGEN);
     NVAR = size(x, 1);
-    Dist=zeros(NVAR,NVAR);
     %De matrix opbouwen, er wordt wel verondersteld dat
     %size(x,1)==size(y,1)==NVAR
+    Dist=zeros(NVAR,NVAR);
     for j=1:NVAR
         Dist(:,j)=sqrt((x(:)-x(j)).^2+(y(:)-y(j)).^2);
     end
@@ -71,7 +70,7 @@ function smallest_tour_dist = run_genalg(x, y, ps)
         % Werkt niet voor subpopulaties!
         NSel=max(floor(Nind*GGAP+.5),2);
         SelCh=select(selection, Chrom, FitnV, GGAP+(mod(NSel,2)/Nind));
-
+        
         %recombine individuals (crossover)
         if(false && round(os_selection_percentage*NVAR)>=1)
             %iets dat de offspringselection moet doen
@@ -92,5 +91,5 @@ function smallest_tour_dist = run_genalg(x, y, ps)
         %increment generation counter
         gen=gen+1;
     end
-    smallest_tour_dist = best(end);
+    smallest_tour_dist = best(find(best < Inf,1,'last'));
 end

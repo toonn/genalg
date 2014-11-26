@@ -1,5 +1,6 @@
 function children = co_edge_recombination_operator(parent1, parent2, ~)
-
+parent1 = adj2path(parent1);
+parent2 = adj2path(parent2);
 N=size(parent1,2);
 
 child=zeros(1,N);
@@ -17,8 +18,8 @@ for i=1:N
 end
 connectedCities_backup;
 %je moet met een random positie beginnen aangezien het op de beginpositie
-%is dat een nieuwe edge zal worden geïntroduceerd normaal gezien
-for j=1:2
+%is dat een nieuwe edge zal worden geï¿½ntroduceerd normaal gezien
+for u=1:2
     connectedCities=connectedCities_backup;
     list=1:N;
     p=randi(N);
@@ -47,7 +48,8 @@ for j=1:2
         child(i)=p;
         list(find(list==p))=0;
     end
-    children(j,:)=child;
+    
+    children(u,:)=path2adj(child);
 end
 
 end

@@ -2,26 +2,28 @@ data = load(['datasets/' 'rondrit016.tsp']);
 x=data(:,1)/max([data(:,1);data(:,2)]);
 y=data(:,2)/max([data(:,1);data(:,2)]);
 
-rng(121);
+rng(4);
 
+ncities = size(x,1);
+ngens = 20;
 Nind = 50;
 Nind_co = 30;
 Nind_mu = Nind - Nind_co - 1;
 
+generations = cell(Nind, ncities + 1, ngens);
+
 meta_chromosome;
 pop = meta_generateInitialPop(50);
 
-for gen = 1:20
+for gen = 1:ngens
     Fs = [];
     for ind = pop'  
         ind = ind';
-        tic;
-            best_dist = run_genalg(x, y, ind);
-        t = toc;
-        F = best_dist + t;
+        best_dist = run_genalg(x, y, ind);
+        F = best_dist;
         Fs = [Fs ; F];
     end
-
+    
     elite = {pop{find(Fs == min(Fs),1), :}};
 
 %    elite={};
@@ -46,7 +48,8 @@ for gen = 1:20
         mutants = [mutants ; mutant];
     end
     pop = [elite ; offspring ; mutants];
+    generations(:,:,gen) = [pop, num2cell(Fs)];
 end
 
-elite
+status = 'finished'
     
