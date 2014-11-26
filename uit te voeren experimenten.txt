@@ -1,0 +1,7 @@
+Iets dat aantoont dat het bepaalde combinaties van operators zijn die goed werken
+Hoe?
+	je maakt een experiment en vindt een bepaalde combinatie co-mu
+	je laat dan de mu of de co weg en vindt dan zo dat het een andere co of mu is die de beste is
+
+Een experiment wet de beste combinatie is
+Maar eens met maar 1 co en 1 mu en een keer met meerdere toegelaten en dan kijken hoe de beste zich verhouden
