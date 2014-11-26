@@ -1,5 +1,5 @@
 function child = co_cyclic_crossover(parent1, parent2, ~)
-    i=randi(N-1);
+    i=randi(size(parent1, 2)-1);
     
     parent1 = adj2path(parent1);
     parent2 = circshift(adj2path(parent2), [0, i]);
