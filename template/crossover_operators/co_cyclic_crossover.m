@@ -1,13 +1,12 @@
 function child = co_cyclic_crossover(parent1, parent2, ~)
+    i=randi(N-1);
     
     parent1 = adj2path(parent1);
-    parent2 = adj2path(parent2);
+    parent2 = circshift(adj2path(parent2), [0, i]);
 
     parents=[parent1 ; parent2];
     N=size(parent1,2);
     child=zeros(2,N);
-
-    i=randi(N);
 
     child(1,1) = parents(1,1);
     child(2,1) = parents(2,1);
