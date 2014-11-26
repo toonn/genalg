@@ -62,7 +62,7 @@ function smallest_tour_dist = run_genalg(x, y, ps)
         
         %termination criterion
         if (sObjV(stopN)-sObjV(1) <= 1e-15)
-              break;
+            break;
         end
         %assign fitness values to entire population
         FitnV=ranking(ObjV);

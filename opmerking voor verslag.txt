@@ -3,3 +3,4 @@ het zal allemaal wel schalen met Nind, en voor elke crossover operator meet je d
 	de gemiddelde tijd over 1000 experimenten (duurt 0 seconden sowieso) en dan die
 	maal de Nind en maal het percentage dat die crossover operator wordt gebruikt en 
 	BAM
+parallelliseren
