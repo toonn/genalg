@@ -4,9 +4,9 @@ y=data(:,2)/max([data(:,1);data(:,2)]);
 
 rng(4);
 
-meta_chromosome;
+meta_chr_single_cx_mu;
 
-nparams = 16;
+nparams = 11;
 ngens = 20;
 Nind = 50;
 Nind_co = 30;
@@ -14,13 +14,14 @@ Nind_mu = Nind - Nind_co - 1;
 
 generations = cell(Nind, nparams + 1, ngens);
 
+
 pop = meta_generateInitialPop(50);
 
 for gen = 1:ngens
     Fs = [];
     for ind = pop'  
         ind = ind';
-        best_dist = run_genalg(x, y, ind);
+        best_dist = run_genalg_simple_chr(x, y, ind);
         F = best_dist;
         Fs = [Fs ; F];
     end
@@ -32,6 +33,7 @@ for gen = 1:ngens
 %     for i=1:NofElites
 %         elite = [elite ; {pop{find(Fs == Fs(order(i)),1),:}}];
 %     end
+    
 
     parents = sus(Fs, 2*Nind_co);
     
