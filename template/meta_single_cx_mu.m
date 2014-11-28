@@ -18,13 +18,7 @@ generations = cell(Nind, nparams + 1, ngens);
 pop = meta_generateInitialPop(50);
 
 for gen = 1:ngens
-    Fs = [];
-    for ind = pop'  
-        ind = ind';
-        best_dist = run_genalg_simple_chr(x, y, ind);
-        F = best_dist;
-        Fs = [Fs ; F];
-    end
+    Fs = meta_fitness(@run_genalg_simple_chr, x, y, pop);
     
     elite = {pop{find(Fs == min(Fs),1), :}};
 

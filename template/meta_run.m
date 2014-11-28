@@ -16,14 +16,11 @@ generations = cell(Nind, nparams + 1, ngens);
 
 pop = meta_generateInitialPop(50);
 
+cxopcosts = [1.8241, 2.1820, 4.6942, 2.4366];    
+muopcosts = [0.0184, 0.0264, 0.0283];
+
 for gen = 1:ngens
-    Fs = [];
-    for ind = pop'  
-        ind = ind';
-        best_dist = run_genalg(x, y, ind);
-        F = best_dist;
-        Fs = [Fs ; F];
-    end
+    Fs = meta_fitness(@run_genalg, x, y, pop, cxopcosts, muopcosts);
     
     elite = {pop{find(Fs == min(Fs),1), :}};
 
