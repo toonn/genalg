@@ -23,14 +23,14 @@ for i=1:noftests
         for k=1:nofrunspertest
             crossover_operators{j}(chr1,chr2,dist);
         end
-        crosscosts(i,j)=crosscosts(j)+toc;
+        crosscosts(i,j)= toc / nofrunspertest;
     end
     for j=1:size(mutation_operators,2)
         tic
         for k=1:nofrunspertest
             mutation_operators{j}(chr1,1);
         end
-        mutcosts(i,j)=mutcosts(j)+toc;
+        mutcosts(i,j)= toc / nofrunspertest;
     end
 end
 

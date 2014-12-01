@@ -17,7 +17,7 @@ function smallest_tour_dist = run_genalg(x, y, ps)
     crossover_probs = [ps{6:9}];
 % PR_MUT: probability for mutation
     PR_MUT = ps{10};
-    mutation_operators = {@mu_inversion, @mu_reciprocal_exchange, @mu_insertion};
+    mutation_operators = {@mu_insertion, @mu_inversion, @mu_reciprocal_exchange};
     mutation_probs = [ps{11:13}];
 % selection: selection method
     selection = ps{14};
