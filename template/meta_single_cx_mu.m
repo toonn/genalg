@@ -7,7 +7,7 @@ rng(4);
 meta_chr_single_cx_mu;
 
 nparams = 11;
-ngens = 20;
+ngens = 100;
 Nind = 50;
 Nind_co = 30;
 Nind_mu = Nind - Nind_co - 1;
@@ -19,7 +19,7 @@ generations = cell(Nind, nparams + 2, ngens);
 pop = meta_generateInitialPop(50);
 
 for gen = 1:ngens
-    [Ds, Fs] = meta_fitness(@run_genalg_simple_chr, x, y, pop, 1);
+    [Ds, Fs] = meta_fitness(@run_genalg_simple_chr, x, y, pop, alpha);
     
     elite = {pop{find(Fs == min(Fs),1), :}};
 

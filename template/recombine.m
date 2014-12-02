@@ -25,7 +25,7 @@
 
 
 
-function NewChrom = recombine(REC_Fs, crossover_probs, Chrom, costMatrix)
+function NewChrom = recombine(REC_Fs, crossover_probs, Chrom, costMatrix, CrossOpt)
     crossover_probs = crossover_probs/sum(crossover_probs);
     NewChrom = [];
     for irun = 1:2:size(Chrom,1)-1
@@ -33,6 +33,10 @@ function NewChrom = recombine(REC_Fs, crossover_probs, Chrom, costMatrix)
         parent2 = Chrom(irun+1, :);
         cx_Ix = randsample(1:size(REC_Fs, 2), 1, true, crossover_probs);
         children = feval(REC_Fs{cx_Ix}, parent1, parent2, costMatrix);
-        NewChrom=[NewChrom; children];
+        if (rand < CrossOpt)
+            NewChrom=[NewChrom; children];
+        else
+            NewChrom = [NewChrom; parent1 ; parent2];
+        end
     end
 

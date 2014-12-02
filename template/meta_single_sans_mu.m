@@ -1,4 +1,4 @@
-data = load(['tsp_benchmark/' 'burma14_3323.tsp']);
+data = load(['tsp_benchmark/' 'belgiumtour.tsp']);
 x=data(:,1)/max([data(:,1);data(:,2)]);
 y=data(:,2)/max([data(:,1);data(:,2)]);
 

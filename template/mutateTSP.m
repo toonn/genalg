@@ -25,7 +25,9 @@ function NewChrom = mutateTSP(MUT_Fs, mutation_probs, OldChrom, MutOpt)
 
     for r=1:rows
             mut_Ix = randsample(1:size(MUT_Fs, 2), 1, true, mutation_probs);
-            NewChrom(r,:) = feval(MUT_Fs{mut_Ix}, OldChrom(r,:),1);
+            if (rand < MutOpt)
+                NewChrom(r,:) = feval(MUT_Fs{mut_Ix}, OldChrom(r,:),1);
+            end
     end
 end
 

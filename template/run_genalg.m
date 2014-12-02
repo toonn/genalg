@@ -79,7 +79,7 @@ function smallest_tour_dist = run_genalg(x, y, ps)
                                         round(os_selection_percentage*NVAR));
             %nog iets om [Chrom ObjV te krijgen]
         else
-            SelCh = recombine(crossover_operators, crossover_probs, SelCh, Dist);
+            SelCh = recombine(crossover_operators, crossover_probs, SelCh, Dist, PR_CROSS);
             SelCh = SelCh(1:end-mod(NSel,2),:);
             %evaluate offspring, call objective function
             ObjVSel = tspfun(SelCh,Dist);
