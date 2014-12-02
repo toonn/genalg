@@ -2,7 +2,8 @@ data = load(['tsp_benchmark/' 'burma14_3323.tsp']);
 x=data(:,1)/max([data(:,1);data(:,2)]);
 y=data(:,2)/max([data(:,1);data(:,2)]);
 
-rng(4);
+seed = 3;
+rng(seed);
 
 meta_chr_single_cx_mu;
 
@@ -19,6 +20,7 @@ generations = cell(Nind, nparams + 2, ngens);
 pop = meta_generateInitialPop(50);
 
 for gen = 1:ngens
+    rng(seed);
     [Ds, Fs] = meta_fitness(@run_genalg_simple_chr, x, y, pop, alpha);
     
     elite = {pop{find(Fs == min(Fs),1), :}};

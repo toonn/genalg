@@ -2,7 +2,8 @@ data = load(['tsp_benchmark/' 'belgiumtour.tsp']);
 x=data(:,1)/max([data(:,1);data(:,2)]);
 y=data(:,2)/max([data(:,1);data(:,2)]);
 
-rng(4);
+seed = 4;
+rng(seed);
 
 meta_chr_single_cx;
 
