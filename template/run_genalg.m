@@ -1,4 +1,4 @@
-function smallest_tour_dist = run_genalg(x, y, ps)
+oeuho-ruhordrofunction smallest_tour_dist = run_genalg(x, y, ps)
 % x, y: coordinates of the cities
 % NIND: number of individuals
     Nind = ps{1};
@@ -69,24 +69,34 @@ function smallest_tour_dist = run_genalg(x, y, ps)
         %select individuals for breeding
         % Werkt niet voor subpopulaties!
         NSel=max(floor(Nind*GGAP+.5),2);
-        SelCh=select(selection, Chrom, FitnV, GGAP+(mod(NSel,2)/Nind));
-        
-        %recombine individuals (crossover)
-        if(false && round(os_selection_percentage*NVAR)>=1)
-            %iets dat de offspringselection moet doen
-            SelCh = offspringSelection(os_selection,CROSSOVER,mutation, ...
-                                        SelCh,pr_cross,pr_mut, ...
-                                        round(os_selection_percentage*NVAR));
-            %nog iets om [Chrom ObjV te krijgen]
-        else
-            SelCh = recombine(crossover_operators, crossover_probs, SelCh, Dist, PR_CROSS);
-            SelCh = SelCh(1:end-mod(NSel,2),:);
-            %evaluate offspring, call objective function
-            ObjVSel = tspfun(SelCh,Dist);
-            %reinsert offspring into population
-            [Chrom, ObjV]=reins(Chrom,SelCh,1,1,ObjV,ObjVSel);
-            Chrom = mutateTSP(mutation_operators, mutation_probs, Chrom, PR_MUT);
+        NSelOs = floor(NSel*os_selection_percentage);
+        NSel2 = NSel;
+        NSelPer = (NSel + mod(NSel,2))/Nind;
+        SelCh = [];
+        for tries = 1:5
+            Parents = select(selection, Chrom, FitnV, NSelPer);
+            Children = recombine(crossover_operators, crossover_probs, Parents, Dist, PR_CROSS);
+            Children = Children(1:end-mod(NSel2, 2),:);
+            [Children, Garbage] = os_selection(Children, Parents, Dist);
+            NSel2 = NSel - size(SelCh, 1);
+            NSelPer = (NSel2 + mod(NSel2, 2))/Nind;
+            if (size(Children,1) < NSel2)
+                SelCh = [SelCh ; Children];
+                if (size(SelCh,1) >= NSelOs)
+                    break;
+                end
+            else
+                SelCh = [SelCh ; Children(1:NSel2, :)];
+                break;
+            end
         end
+        SelCh = [SelCh ; Garbage];
+        
+        %evaluate offspring, call objective function
+        ObjVSel = tspfun(SelCh,Dist);
+        %reinsert offspring into population
+        [Chrom, ObjV]=reins(Chrom,SelCh,1,1,ObjV,ObjVSel);
+        Chrom = mutateTSP(mutation_operators, mutation_probs, Chrom, PR_MUT);
         %Chrom = tsp_ImprovePopulation(Nind, NVAR, Chrom,1,Dist);
         %increment generation counter
         gen=gen+1;

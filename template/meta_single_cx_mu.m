@@ -2,13 +2,13 @@ data = load(['tsp_benchmark/' 'burma14_3323.tsp']);
 x=data(:,1)/max([data(:,1);data(:,2)]);
 y=data(:,2)/max([data(:,1);data(:,2)]);
 
-seed = 3;
+seed = 4;
 rng(seed);
 
 meta_chr_single_cx_mu;
 
 nparams = 11;
-ngens = 100;
+ngens = 20;
 Nind = 50;
 Nind_co = 30;
 Nind_mu = Nind - Nind_co - 1;
@@ -20,7 +20,6 @@ generations = cell(Nind, nparams + 2, ngens);
 pop = meta_generateInitialPop(50);
 
 for gen = 1:ngens
-    rng(seed);
     [Ds, Fs] = meta_fitness(@run_genalg_simple_chr, x, y, pop, alpha);
     
     elite = {pop{find(Fs == min(Fs),1), :}};
@@ -51,7 +50,7 @@ for gen = 1:ngens
     generations(:,:,gen) = [pop, num2cell(Ds), num2cell(Fs)];
 end
 
-cols = [6,8,9];
+cols = [6,8,9,11];
 for col = cols
     for row = 1:size(generations,1)
         for depth = 1:size(generations,3)
@@ -68,7 +67,7 @@ params = {'nind', 'maxgen', 'elitist', 'stoppercentage',...
           '%d\t', '%d\t', '%f\t', '%f\t',...
           '%f\t', '%s\t', '%f\t', '%s\t',...
           '%s\t', '%f\t', '%d\t',...
-          '%f\t', '%f\t'};
+          '%f\t', '%s\t'};
 for param = 1:size(params,2)
     file_name = strcat('results/',...
                 exp,...

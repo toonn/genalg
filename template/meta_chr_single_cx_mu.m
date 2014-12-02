@@ -24,13 +24,14 @@ muops = {@mu_insertion,...
          @mu_reciprocal_exchange};
 
 possibleSels={@sus};
-possibleOsSels={};
+possibleOsSels={@offspring_selection};
+osper = [0, 1];
 
 global limits
 limits = {ninds ngens eliteper stopper...
           crossprob cxops...
           mutprob muops...
-          possibleSels [0, 0] possibleOsSels};
+          possibleSels osper possibleOsSels};
                    
 global mutFreqs
 mutFreqs=num2cell(cumsum(ones(1,nofparams)/nofparams));
