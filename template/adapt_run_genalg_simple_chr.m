@@ -1,4 +1,4 @@
-function smallest_tour_dist = run_genalg_simple_chr(x, y, ps)
+function smallest_tour_dist = adapt_run_genalg_simple_chr(x, y, ps)
 % x, y: coordinates of the cities
 % NIND: number of individuals
     Nind = ps{1};
@@ -49,6 +49,12 @@ function smallest_tour_dist = run_genalg_simple_chr(x, y, ps)
     gen=0;
     % generational loop
     while gen<MAXGEN
+        if(gen==ceil(MAXGEN/2))
+            PR_CROSS = ps{12};
+            crossover_operator = ps{13};
+            PR_MUT = ps{14};
+            mutation_operator = ps{15};
+        end
         %de sObjV is belangrijk voor het stopcriterium
         [sObjV,~]=sort(ObjV);
         best(gen+1)=sObjV(1);
