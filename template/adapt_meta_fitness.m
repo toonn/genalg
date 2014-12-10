@@ -26,8 +26,9 @@ function [Ds, Fs] = adapt_meta_fitness( genalg, x, y, pop, alpha)
             F = best_dist + alpha * sum( nofoperatorexecutions *...
                             ([(ind{5} .* [ind{6:9}]) (ind{10} .* [ind{11:13}])] .* op_times));
         else
-            F = best_dist + alpha * nofoperatorexecutions * (ind{5} * optimes(func2str(ind{6}))...
-                                            + ind{7} * optimes(func2str(ind{8})));
+            %ook aangepast voor adapt
+            F = best_dist + alpha * nofoperatorexecutions * 0.5 * (ind{5} * optimes(func2str(ind{6}))...
+                                            + ind{7} * optimes(func2str(ind{8})) + ind{12} * optimes(func2str(ind{13})) + ind{14} * optimes(func2str(ind{15})));
         end
         Fs = [Fs ; F];
         Ds = [Ds ; D];

@@ -69,7 +69,7 @@ function smallest_tour_dist = adapt_run_genalg_simple_chr(x, y, ps)
         FitnV=ranking(ObjV);
         %select individuals for breeding
         % Werkt niet voor subpopulaties!
-NSel=max(floor(Nind*GGAP+.5),2);
+        NSel=max(floor(Nind*GGAP+.5),2);
         NSelOs = floor(NSel*os_selection_percentage);
         NSel2 = NSel;
         NSelPer = (NSel + mod(NSel,2))/Nind;

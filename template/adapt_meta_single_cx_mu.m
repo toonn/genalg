@@ -1,18 +1,18 @@
-data = load(['tsp_benchmark/' 'burma14_3323.tsp']);
+data = load(['datasets/' 'rondrit016.tsp']);
 x=data(:,1)/max([data(:,1);data(:,2)]);
 y=data(:,2)/max([data(:,1);data(:,2)]);
 
 seed = 4;
 rng(seed);
 
-meta_chr_single_cx_mu;
+adapt_meta_chr_single_cx_mu;
 
-nparams = 11;
-ngens = 20;
+nparams = 15;
+ngens = 50;
 Nind = 50;
 Nind_co = 30;
 Nind_mu = Nind - Nind_co - 1;
-alpha = 1;
+alpha = 0.02;
 
 generations = cell(Nind, nparams + 2, ngens);
 
@@ -68,10 +68,10 @@ params = {'nind', 'maxgen', 'elitist', 'stoppercentage',...
           'distance', 'fitness';
           '%d\t', '%d\t', '%f\t', '%f\t',...
           '%f\t', '%s\t', '%f\t', '%s\t',...
-          '%s\t', '%f\t', '%d\t',...
+          '%s\t', '%f\t', '%s\t',...
           '%f\t', '%s\t', ...
           '%f\t', '%s\t', ...
-          '%f\t', '%s\t'};
+          '%f\t', '%f\t'};
 for param = 1:size(params,2)
     file_name = strcat('results/',...
                 exp,...
