@@ -1,4 +1,4 @@
-data = load(['tsp_benchmark/' 'belgiumtour.tsp']);
+data = load(['tsp_benchmark/' 'burma14_3323.tsp']);
 x=data(:,1)/max([data(:,1);data(:,2)]);
 y=data(:,2)/max([data(:,1);data(:,2)]);
 
@@ -12,7 +12,7 @@ ngens = 20;
 Nind = 50;
 Nind_co = 30;
 Nind_mu = Nind - Nind_co - 1;
-alpha = 1;
+alpha = 0.05;
 
 generations = cell(Nind, nparams + 2, ngens);
 
@@ -49,7 +49,7 @@ for gen = 1:ngens
     generations(:,:,gen) = [pop, num2cell(Ds), num2cell(Fs)];
 end
 
-cols = 14;
+cols = [14, 16];
 for col = cols
     for row = 1:size(generations,1)
         for depth = 1:size(generations,3)
@@ -66,7 +66,7 @@ params = {'nind', 'maxgen', 'elitist', 'stoppercentage', 'crossprob',...
           '%d\t', '%d\t', '%f\t', '%f\t', '%f\t',...
           '%f\t', '%f\t', '%f\t',...
           '%f\t', '%f\t', '%f\t', '%f\t',...
-          '%f\t', '%s\t', '%f\t', '%d\t', '%f\t', '%f\t'};
+          '%f\t', '%s\t', '%f\t', '%s\t', '%f\t', '%f\t'};
 for param = 1:size(params,2)
     file_name = strcat('results/',...
                 exp,...

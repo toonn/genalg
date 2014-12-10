@@ -9,7 +9,7 @@ nofparams = 16;
 
 ninds = [1, 100];
 ngens = [1, 20];
-eliteper = [0, 1];
+eliteper = [0, 0.2];
 stopper = [0, 1];
 
 crossprob = [0, 1];
