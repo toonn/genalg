@@ -1,4 +1,4 @@
-oeuho-ruhordrofunction smallest_tour_dist = run_genalg(x, y, ps)
+function smallest_tour_dist = run_genalg(x, y, ps)
 % x, y: coordinates of the cities
 % NIND: number of individuals
     Nind = ps{1};
