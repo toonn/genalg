@@ -12,7 +12,7 @@ ngens = 20;
 Nind = 50;
 Nind_co = 30;
 Nind_mu = Nind - Nind_co - 1;
-alpha = 0.05;
+alpha = 5;
 
 generations = cell(Nind, nparams + 2, ngens);
 
