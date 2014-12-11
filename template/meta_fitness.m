@@ -11,24 +11,33 @@ function [Ds, Fs] = meta_fitness( genalg, x, y, pop, alpha)
                  optimes('mu_reciprocal_exchange')];
     end
     
-    Fs = [];
-    Ds = [];
+    Futures = [];
+    Times = [];
     for ind = pop'
         ind = ind';
-        best_dist = genalg(x, y, ind);
-        D = best_dist;
-        
+        Futures = [Futures ; parfeval(genalg, 1, x, y, ind)];
+    
         % Tijd is som van (#keer operators uitgevoerd worden * kost operators)
         % #keer is #indiv * #gens ~ #maxgens * (1-elite)
         nofoperatorexecutions = ind{1} * ind{2} * (1-ind{3});
         if exist('op_times', 'var')
             % kost is kans op cx/mu ind(5/10) * kans op operator ([ind...]) * tijd voor operator (op_times)
-            F = best_dist + alpha * size(x,1) / 16 * sum( nofoperatorexecutions *...
+            T = alpha * size(x,1) / 16 * sum( nofoperatorexecutions *...
                             ([(ind{5} .* [ind{6:9}]) (ind{10} .* [ind{11:13}])] .* op_times));
         else
-            F = best_dist + alpha * size(x,1) / 16 * nofoperatorexecutions * (ind{5} * optimes(func2str(ind{6}))...
+            T = alpha * size(x,1) / 16 * nofoperatorexecutions * (ind{5} * optimes(func2str(ind{6}))...
                                             + ind{7} * optimes(func2str(ind{8})));
         end
+        Times = [Times ; T];
+    end
+    
+    Fs = [];
+    Ds = [];
+    for ix = 1:size(Futures, 1)
+        best_dist = fetchOutputs(Futures(ix));
+        D = best_dist;    
+        F = best_dist + Times(ix);
+        
         Fs = [Fs ; F];
         Ds = [Ds ; D];
     end

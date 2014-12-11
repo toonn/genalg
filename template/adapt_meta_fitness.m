@@ -10,14 +10,13 @@ function [Ds, Fs] = adapt_meta_fitness( genalg, x, y, pop, alpha)
                  optimes('mu_inversion'),...
                  optimes('mu_reciprocal_exchange')];
     end
-    
-    Fs = [];
-    Ds = [];
-    for ind = pop'
+
+    Futures = [];
+    Times = [];
+    for ind = ind';
         ind = ind';
-        best_dist = genalg(x, y, ind);
-        D = best_dist;
-        
+        Futures = [Futures ; parfeval(genalg, 1, x, y, ind)];
+
         % Tijd is som van (#keer operators uitgevoerd worden * kost operators)
         % #keer is #indiv * #gens ~ #maxgens * (1-elite)
         nofoperatorexecutions = ind{1} * ind{2} * (1-ind{3});
@@ -30,6 +29,17 @@ function [Ds, Fs] = adapt_meta_fitness( genalg, x, y, pop, alpha)
             F = best_dist + alpha * nofoperatorexecutions * 0.5 * (ind{5} * optimes(func2str(ind{6}))...
                                             + ind{7} * optimes(func2str(ind{8})) + ind{12} * optimes(func2str(ind{13})) + ind{14} * optimes(func2str(ind{15})));
         end
+        
+        Times = [Times ; T];
+    end
+    
+    Fs = [];
+    Ds = [];
+    for ix = 1:size(Futures, 1)
+        best_dist = fetchOutputs(Futures(ix));
+        D = best_dist;
+        F = best_dist + Times(ix);
+        
         Fs = [Fs ; F];
         Ds = [Ds ; D];
     end
