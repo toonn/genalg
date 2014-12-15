@@ -1,0 +1,56 @@
+data1 = load(['tsp_benchmark/' 'burma14_3323.tsp']);
+x1=data1(:,1)/max([data1(:,1);data1(:,2)]);
+y1=data1(:,2)/max([data1(:,1);data1(:,2)]);
+
+data2 = load(['tsp_benchmark/' 'belgiumtour.tsp']);
+x2=data2(:,1)/max([data2(:,1);data2(:,2)]);
+y2=data2(:,2)/max([data2(:,1);data2(:,2)]);
+
+ps = {98 19 0.120402 0.369319...
+        0.689400 0.068335 0.061629 0.259060 0.375834...
+        0.101074 0.545805 0.431146 0.244294...
+        @sus 0.592706 @offspring_selection};
+    
+seed = 4;
+
+rng(seed);
+fitness1 = run_genalg(x1, y1, ps);
+
+rng(seed);
+fitness2 = run_genalg(x2, y2, ps);
+
+cols = [14, 16];
+for col = cols
+	ps{col} = func2str(ps{col});
+end
+
+params = {'nind', 'maxgen', 'elitist', 'stoppercentage', 'crossprob',...
+          'cross_alternate_edges', 'cross_cyclic', 'cross_edge_recombination',...
+          'cross_seq_const', 'muprob', 'mut_insertion', 'mut_inversion',...
+          'mut_reciprocal_exchange', 'sus', 'os_sel_per', 'os_sel';
+          '%d\t', '%d\t', '%f\t', '%f\t', '%f\t',...
+          '%f\t', '%f\t', '%f\t',...
+          '%f\t', '%f\t', '%f\t', '%f\t',...
+          '%f\t', '%s\t', '%f\t', '%s\t'};
+for param = 1:size(params,2)
+    file_name = strcat('results/',...
+                'run_best_params',...
+                '.txt');
+    fileID = fopen(file_name,'w');
+    paramSpec = strcat('%d\t', '%d\t', '%f\t', '%f\t', '%f\t',...
+          '%f\t', '%f\t', '%f\t',...
+          '%f\t', '%f\t', '%f\t', '%f\t',...
+          '%f\t', '%s\t', '%f\t', '%s');
+    fprintf(fileID, 'Best params for rondrit016.tsp:\n');
+    fprintf(fileID, strcat('nind\t', 'maxgen\t', 'elitist\t', 'stoppercentage\t', 'crossprob\t',...
+          'cross_alternate_edges\t', 'cross_cyclic\t', 'cross_edge_recombination\t',...
+          'cross_seq_const\t', 'muprob\t', 'mut_insertion\t', 'mut_inversion\t',...
+          'mut_reciprocal_exchange\t', 'sus\t', 'os_sel_per\t', 'os_sel\n'));
+    fprintf(fileID, paramSpec, ps{:});
+    fprintf(fileID, '\n\n');
+    fprintf(fileID, 'Fitness result for burma14:\n');
+    fprintf(fileID, '%f\n\n', fitness1);
+    fprintf(fileID, 'Fitness result for belgiumtour:\n');
+    fprintf(fileID, '%f', fitness2);
+    fclose(fileID);
+end

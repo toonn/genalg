@@ -1,0 +1,9 @@
+Best params for rondrit016.tsp:
+nind	maxgen	elitist	stoppercentage	crossprob	cross_alternate_edges	cross_cyclic	cross_edge_recombination	cross_seq_const	muprob	mut_insertion	mut_inversion	mut_reciprocal_exchange	sus	os_sel_per	os_sel
+98	19	0.120402	0.369319	0.689400	0.068335	0.061629	0.259060	0.375834	0.101074	0.545805	0.431146	0.244294	sus	0.592706	offspring_selection
+
+Fitness result for burma14:
+0.330465
+
+Fitness result for belgiumtour:
+5.154778
