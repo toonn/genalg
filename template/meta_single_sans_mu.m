@@ -1,18 +1,18 @@
-data = load(['tsp_benchmark/' 'belgiumtour.tsp']);
+data = load(['datasets/' 'rondrit016.tsp']);
 x=data(:,1)/max([data(:,1);data(:,2)]);
 y=data(:,2)/max([data(:,1);data(:,2)]);
 
 seed = 4;
 rng(seed);
 
-meta_chr_single_mu;
+meta_chr_single_sans_mu;
 
 nparams = 11;
-ngens = 20;
+ngens = 50;
 Nind = 50;
 Nind_co = 30;
 Nind_mu = Nind - Nind_co - 1;
-alpha = 1;
+alpha = 0.02;
 
 generations = cell(Nind, nparams + 2, ngens);
 
@@ -49,7 +49,7 @@ for gen = 1:ngens
     generations(:,:,gen) = [pop, num2cell(Ds), num2cell(Fs)];
 end
 
-cols = [6,8,9];
+cols = [6,8,9,11];
 for col = cols
     for row = 1:size(generations,1)
         for depth = 1:size(generations,3)
