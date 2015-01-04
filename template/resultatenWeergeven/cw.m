@@ -1,4 +1,4 @@
-experiment='sp';
+experiment='cw';
 seed=4;
 nofCities=16;
 nofmetainds=50;
@@ -17,7 +17,7 @@ mus=openFileWithStrs(strcat(expstring,param2,'.txt'));
 frequenciesOfCombinations = checkCombinationOfOperators(cos,mus,nofmetainds,nofmaxmetagens)
 
 %%
-cx_strings = {'co_cross_alternate_edges', 'co_cyclic_crossover', 'co_edge_recombination_operator', 'co_sequential_constructive_crossover'};
+cx_strings = {'co_cross_alternate_edges', 'co_cyclic_crossover', 'co_edge_recombination_operator'};
 param1='crossop';
 cxid=fopen(strcat(expstring,param1,'.txt'));
 cxread=textscan(cxid,repmat('%s',1,50));
@@ -26,7 +26,7 @@ fclose(cxid);
 
 figure(1)
 plotNofOpsOverGens(nofmaxmetagens,cxop,cx_strings);
-legend('alternate\_edges','cyclic','edge\_recombination','seq\_const','Location','east');
+legend('alternate\_edges','cyclic','edge\_recombination','Location','east');
 
 mu_strings = {'mu_insertion', 'mu_inversion', 'mu_reciprocal_exchange'};
 param2='muop';
@@ -37,4 +37,4 @@ fclose(muid);
 
 figure(2)
 plotNofOpsOverGens(nofmaxmetagens,muop,mu_strings);
-legend('insertion','inversion','reciprocal\_exchange','Location','east');
+legend('insertion','inversion','reciprocal\_exchange');

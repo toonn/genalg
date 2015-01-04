@@ -1,13 +1,8 @@
-function plotMeanOverGens(nofmaxmetagens,cop,mup,elitcop2,mup2)
+function plotMeanOverGens(nofmaxmetagens, datacell)
 
-plot(1:nofmaxmetagens,mean(cop),'b');
 hold all;
-plot(1:nofmaxmetagens,mean(mup),'g');
-if(exist('elitcop2','var'))
-    plot(1:nofmaxmetagens,mean(elitcop2),'r');
-end
-if(exist('mup2','var'))
-    plot(1:nofmaxmetagens,mean(mup2),'c');
+for data=datacell
+    plot(1:nofmaxmetagens,mean(data{1}));
 end
 hold off;
 

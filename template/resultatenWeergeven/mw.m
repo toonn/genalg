@@ -1,4 +1,4 @@
-experiment='sp';
+experiment='mw';
 seed=4;
 nofCities=16;
 nofmetainds=50;
@@ -28,7 +28,7 @@ figure(1)
 plotNofOpsOverGens(nofmaxmetagens,cxop,cx_strings);
 legend('alternate\_edges','cyclic','edge\_recombination','seq\_const','Location','east');
 
-mu_strings = {'mu_insertion', 'mu_inversion', 'mu_reciprocal_exchange'};
+mu_strings = {'mu_insertion', 'mu_reciprocal_exchange'};
 param2='muop';
 muid=fopen(strcat(expstring,param2,'.txt'));
 muread= textscan(muid,repmat('%s',1,50));
@@ -37,4 +37,4 @@ fclose(muid);
 
 figure(2)
 plotNofOpsOverGens(nofmaxmetagens,muop,mu_strings);
-legend('insertion','inversion','reciprocal\_exchange','Location','east');
+legend('insertion','reciprocal\_exchange');

@@ -11,9 +11,9 @@ cosToCheck = {'co_cross_alternate_edges',...
 cosnof=changeStringsToNumbers(cos,cosToCheck);
 musnof=changeStringsToNumbers(mus,musToCheck);
 
-for i=1:size(cosToCheck,2)
-    for j=1:size(musToCheck,2)
-        frequenciesOfCombinations(i,j)=size(find(((cosnof==i)+(musnof==j))==2),1)/nofmaxmetagens/nofmetainds;
+for i=1:size(musToCheck,2)
+    for j=1:size(cosToCheck,2)
+        frequenciesOfCombinations(i,j)=size(find(((musnof==i)+(cosnof==j))==2),1)/nofmaxmetagens/nofmetainds;
     end
 end
 
